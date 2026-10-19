@@ -3,7 +3,7 @@
 #include "Config.h"
 
 // カテゴリの種類(メニューのタブになる)
-enum class Category { Combat, Move, Hud };
+enum class Category { Combat, Move, Visual, Hud };
 
 // 全機能のひな形
 class Module

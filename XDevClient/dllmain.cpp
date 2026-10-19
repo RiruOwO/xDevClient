@@ -111,6 +111,11 @@ static bool InitD3D12(IDXGISwapChain* sc)
     g_cmd->Close();
 
     ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.IniFilename = nullptr;   // imgui.ini を作らない
+    if (GetFileAttributesA("C:\\Windows\\Fonts\\segoeui.ttf") != INVALID_FILE_ATTRIBUTES)
+        io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 17.0f);
+    Theme::Apply();
     ImGui_ImplWin32_Init(g_hwnd);
 
     ImGui_ImplDX12_InitInfo ii;
@@ -162,16 +167,21 @@ static void RenderFrame(IDXGISwapChain* sc)
 
         if (g_menu)
         {
-            ImGui::Begin("xdev client");
-            ImGui::Text("Insert: menu on/off / End: unload");
-            ImGui::Separator();
+            ImVec2 ds = ImGui::GetIO().DisplaySize;
+            ImGui::SetNextWindowSize(ImVec2(560, 360), ImGuiCond_Always);
+            ImGui::SetNextWindowPos(ImVec2(ds.x * 0.5f - 280.0f, ds.y * 0.5f - 180.0f), ImGuiCond_FirstUseEver);
+            ImGui::Begin("xdev client", nullptr,
+                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar);
+
             ModuleManager::Get().DrawMenu();
-            ImGui::Separator();
+
             if (ImGui::Button("Save")) ModuleManager::Get().SaveAll();
             ImGui::SameLine();
             if (ImGui::Button("Load")) ModuleManager::Get().LoadAll();
             ImGui::SameLine();
             if (ImGui::Button("Unload")) g_unload = true;
+
             ImGui::End();
         }
         ImGui::Render();

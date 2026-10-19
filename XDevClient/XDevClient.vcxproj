@@ -145,6 +145,7 @@
     <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="MoveModules.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Theme.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
