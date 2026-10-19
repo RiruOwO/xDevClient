@@ -3,6 +3,7 @@
 #include <shlobj.h>
 #include <cstdio>
 #include <string>
+#include <cstring>
 
 #pragma comment(lib, "shell32.lib")
 
@@ -38,5 +39,17 @@ namespace Config
         char buf[32];
         sprintf_s(buf, "%d", value);
         WritePrivateProfileStringA(section, key, buf, Path().c_str());
+    }
+
+    inline void GetString(const char* section, const char* key, const char* def, char* out, int size)
+    {
+        if (Path().empty()) { strcpy_s(out, size, def); return; }
+        GetPrivateProfileStringA(section, key, def, out, size, Path().c_str());
+    }
+
+    inline void SetString(const char* section, const char* key, const char* value)
+    {
+        if (Path().empty()) return;
+        WritePrivateProfileStringA(section, key, value, Path().c_str());
     }
 }

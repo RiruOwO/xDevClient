@@ -123,7 +123,8 @@ public:
     {
         for (auto& m : m_modules)
         {
-            m->Enabled() = Config::GetInt(m->GetName(), "enabled", m->IsEnabled() ? 1 : 0) != 0;
+            if (m->HasToggle())
+                m->Enabled() = Config::GetInt(m->GetName(), "enabled", m->IsEnabled() ? 1 : 0) != 0;
             m->OnLoad();
         }
     }
@@ -138,7 +139,10 @@ private:
             if (m->GetCategory() != cat) continue;
             any = true;
             ImGui::PushID(m.get());
-            Theme::Toggle(m->GetName(), &m->Enabled());
+            if (m->HasToggle())
+                Theme::Toggle(m->GetName(), &m->Enabled());
+            else
+                ImGui::TextColored(Theme::Accent(), "%s", m->GetName());   // スイッチなし(常時オン)
             m->OnMenu();
             ImGui::PopID();
             ImGui::Spacing();

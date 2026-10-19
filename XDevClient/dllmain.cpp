@@ -10,6 +10,8 @@
 #include "HudModules.h"
 #include "MoveModules.h"
 #include "CombatModules.h"
+#include "VisualModules.h"
+#include "DevTools.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -295,6 +297,8 @@ DWORD WINAPI MainThread(LPVOID param)
     ModuleManager::Get().Add<FpsModule>();
     ModuleManager::Get().Add<CpsModule>();
     ModuleManager::Get().Add<KeystrokesModule>();
+    ModuleManager::Get().Add<SelfTagModule>();   // Visual(常時有効)
+    ModuleManager::Get().Add<DevToolsModule>();   // Visual(開発用)
     // Move
     ModuleManager::Get().Add<SprintModule>();
     // Combat

@@ -26,6 +26,7 @@ public:
     virtual void OnUnload() {}                          // DLLを外す直前に呼ばれる(後片付け)
     virtual void OnSave() {}                            // 追加の設定を保存する
     virtual void OnLoad() {}                            // 追加の設定を読み込む
+    virtual bool HasToggle() const { return true; }     // falseにすると、オン/オフのスイッチが出ず、常に有効になる
 
 protected:
     const char* m_name;

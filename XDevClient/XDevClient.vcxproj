@@ -139,13 +139,16 @@
   <ItemGroup>
     <ClInclude Include="CombatModules.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="DevTools.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HudModules.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="MoveModules.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Scanner.h" />
     <ClInclude Include="Theme.h" />
+    <ClInclude Include="VisualModules.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

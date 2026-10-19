@@ -99,7 +99,7 @@ public:
         std::vector<const char*> names;
         for (const auto& m : ModuleManager::Get().GetModules())
         {
-            if (m->IsEnabled() && m->GetCategory() != Category::Hud)
+            if (m->IsEnabled() && m->HasToggle() && m->GetCategory() != Category::Hud)
                 names.push_back(m->GetName());
         }
 
